@@ -32,6 +32,6 @@
 - **Donation Allocation System:** Smart algorithms that optimize donation distribution based on charity quality, corporate sponsor goals, and other impactful factors.  
 
 ## 📩 Team  
-**Members:** Zayaan, Aadit, Baldeep, Ayaan  
+**Members:** Aadit, Zayaan, Baldeep, Ayaan  
 
 💡 *Optimizing donations for impactful causes!*  
