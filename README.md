@@ -1,24 +1,37 @@
-# README
+# 1Cause
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 🚀 Overview  
+1Cause is a platform designed to connect donors with charities in an efficient and transparent way. By leveraging AI-driven algorithms and a full-stack infrastructure, the project helps donors easily find meaningful causes to support while reducing the overhead costs for charities. The system also ensures that donations are allocated to the most impactful projects by considering various factors such as charity quality, sponsor goals, and environmental/social outcomes.  
 
-Things you may want to cover:
+## 🏗 Features  
 
-* Ruby version
+### 🌱 Real-Time Charity Scraper  
+- Fetches real-time data on charity causes, ensuring that the platform displays only the most relevant and impactful causes.  
+- Helps donors make well-informed decisions with up-to-date charity proposals.  
 
-* System dependencies
+### 💸 Donation Allocation System  
+- Intelligently allocates donations based on multiple factors, including charity proposal quality and corporate sponsor goals.  
+- Ensures funds are directed toward causes with the greatest potential for environmental or social impact.  
 
-* Configuration
+### 🔒 Secure User Authentication  
+- Built-in user authentication system using Ruby on Rails to ensure that donors and charities can securely access their profiles and donation history.  
 
-* Database creation
+## 🛠 Tech Stack  
 
-* Database initialization
+### **Frontend**  
+- **Framework:** Ruby on Rails  
+- **Styling:** CSS3, HTML5  
+- **Scraping:** Selenium (for real-time charity data scraping), OpenAI API  
 
-* How to run the test suite
+### **Backend**  
+- **Server:** Puma (Ruby web server)  
+- **Database:** AWS DynamoDB, SQLite (for local development)  
+- **Framework:** Ruby on Rails  
 
-* Services (job queues, cache servers, search engines, etc.)
+### **AI/Algorithm**  
+- **Donation Allocation System:** Smart algorithms that optimize donation distribution based on charity quality, corporate sponsor goals, and other impactful factors.  
 
-* Deployment instructions
+## 📩 Team  
+**Members:** Zayaan, Aadit, Baldeep, Ayaan  
 
-* ...
+💡 *Optimizing donations for impactful causes!*  
