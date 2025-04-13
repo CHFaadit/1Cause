@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard | 1Cause</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background: #0077B6;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .header a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .header .home-btn {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header .home-btn:hover {
+            background: white;
+            color: #0077B6;
+        }
+
+        /* Main Content */
+        .container {
+            width: 80%;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .filter-section select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .dashboard-box {
+            width: 48%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .dashboard-box h2 {
+            font-size: 22px;
+            color: #0077B6;
+            margin-bottom: 10px;
+        }
+
+        .cause-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cause-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .cause-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #0077B6;
+        }
+
+        .cause-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .cause-card a {
+            color: #0077B6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cause-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* View All Fundraisers Button */
+        .view-all-btn {
+            background: #005F99;
+            color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .view-all-btn:hover {
+            background: #004377;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="nav-links">
+            <a href="donordashboard.html">Donor Dashboard</a>
+        </div>
+        <button class="home-btn" onclick="window.history.back()">Back</button>
+    </div>
+
+    <div class="container">
+        <h1>Donor Dashboard</h1>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <select id="category-select">
+                <option value="" disabled selected>Filter by Category</option>
+                <option value="environmental">Environmental</option>
+                <option value="health-research">Health Research</option>
+                <option value="humanitarian">Humanitarian</option>
+            </select>
+        </div>
+
+        <!-- Dashboard Sections -->
+        <div class="dashboard-content">
+            <div class="dashboard-box">
+                <h2>Trending Causes</h2>
+                <div id="trending-causes">
+                    <!-- Hardcoded Trending Causes -->
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Environmental Cause">
+                        <div>
+                            <h3>Save the Rainforest</h3>
+                            <p>Protecting the Amazon rainforest from deforestation.</p>
+                            <a href="https://www.rainforesttrust.org/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Health Research Cause">
+                        <div>
+                            <h3>Cancer Research Fund</h3>
+                            <p>Funding groundbreaking research to cure cancer.</p>
+                            <a href="https://www.cancerresearch.org/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Humanitarian Cause">
+                        <div>
+                            <h3>Refugee Relief</h3>
+                            <p>Providing food and shelter to war-torn refugees.</p>
+                            <a href="https://www.unhcr.org/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-box">
+                <h2>Causes that Need More Support</h2>
+                <div id="more-support-causes">
+                    <!-- Hardcoded Causes Needing Support -->
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Environmental Cause">
+                        <div>
+                            <h3>Clean Oceans Initiative</h3>
+                            <p>Reducing plastic waste in our oceans.</p>
+                            <a href="https://www.oceanconservancy.org/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Health Research Cause">
+                        <div>
+                            <h3>Mental Health Awareness</h3>
+                            <p>Supporting mental health programs worldwide.</p>
+                            <a href="https://www.mentalhealthamerica.net/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="cause-card">
+                        <img src="https://images.unsplash.com/photo-1508854710579-5cecc3a9ff17?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" alt="Humanitarian Cause">
+                        <div>
+                            <h3>Disaster Relief Fund</h3>
+                            <p>Helping communities recover from natural disasters.</p>
+                            <a href="https://www.redcross.org/" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="view-all-btn" onclick="window.location.href='/problems'">View All Fundraisers</button>
+    </div>
+
+    <script>
+        // Hardcoded data for filters
+        const causesData = {
+            environmental: {
+                trending: [
+                    {
+                        name: "Save the Rainforest",
+                        description: "Protecting the Amazon rainforest from deforestation.",
+                        image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.rainforesttrust.org/"
+                    },
+                    {
+                        name: "Clean Energy for All",
+                        description: "Promoting renewable energy sources worldwide.",
+                        image: "https://images.unsplash.com/photo-1487611459768-bd414656ea10?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.greenpeace.org/"
+                    }
+                ],
+                moreSupport: [
+                    {
+                        name: "Clean Oceans Initiative",
+                        description: "Reducing plastic waste in our oceans.",
+                        image: "https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.oceanconservancy.org/"
+                    },
+                    {
+                        name: "Wildlife Conservation",
+                        description: "Protecting endangered species and their habitats.",
+                        image: "https://images.unsplash.com/photo-1550358864-518f256c92a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.worldwildlife.org/"
+                    }
+                ]
+            },
+            "health-research": {
+                trending: [
+                    {
+                        name: "Cancer Research Fund",
+                        description: "Funding groundbreaking research to cure cancer.",
+                        image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.cancerresearch.org/"
+                    },
+                    {
+                        name: "Vaccine Development",
+                        description: "Supporting the development of life-saving vaccines.",
+                        image: "https://images.unsplash.com/photo-1576765974257-b414b9ea0051?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.who.int/"
+                    }
+                ],
+                moreSupport: [
+                    {
+                        name: "Mental Health Awareness",
+                        description: "Supporting mental health programs worldwide.",
+                        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.mentalhealthamerica.net/"
+                    },
+                    {
+                        name: "Rare Disease Research",
+                        description: "Funding research for rare and neglected diseases.",
+                        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://rarediseases.org/"
+                    }
+                ]
+            },
+            humanitarian: {
+                trending: [
+                    {
+                        name: "Refugee Relief",
+                        description: "Providing food and shelter to war-torn refugees.",
+                        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.unhcr.org/"
+                    },
+                    {
+                        name: "Education for All",
+                        description: "Building schools for underprivileged children.",
+                        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.savethechildren.org/"
+                    }
+                ],
+                moreSupport: [
+                    {
+                        name: "Disaster Relief Fund",
+                        description: "Helping communities recover from natural disasters.",
+                        image: "https://images.unsplash.com/photo-1508854710579-5cecc3a9ff17?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.redcross.org/"
+                    },
+                    {
+                        name: "Food Security Initiative",
+                        description: "Ensuring access to nutritious food for all.",
+                        image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80",
+                        link: "https://www.wfp.org/"
+                    }
+                ]
+            }
+        };
+
+        // Fetch causes based on selected category
+        document.getElementById('category-select').addEventListener('change', function() {
+            let category = this.value;
+            const data = causesData[category];
+
+            const trendingContainer = document.getElementById('trending-causes');
+            const supportContainer = document.getElementById('more-support-causes');
+
+            // Clear previous content
+            trendingContainer.innerHTML = '';
+            supportContainer.innerHTML = '';
+
+            // Populate with new data
+            data.trending.forEach(cause => {
+                trendingContainer.innerHTML += `
+                    <div class="cause-card">
+                        <img src="${cause.image}" alt="${cause.name}">
+                        <div>
+                            <h3>${cause.name}</h3>
+                            <p>${cause.description}</p>
+                            <a href="${cause.link}" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            data.moreSupport.forEach(cause => {
+                supportContainer.innerHTML += `
+                    <div class="cause-card">
+                        <img src="${cause.image}" alt="${cause.name}">
+                        <div>
+                            <h3>${cause.name}</h3>
+                            <p>${cause.description}</p>
+                            <a href="${cause.link}" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+
+</body>
+</html>

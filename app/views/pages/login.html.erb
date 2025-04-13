@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | 1Cause</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background: #0077B6;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .header .home-btn {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header .home-btn:hover {
+            background: white;
+            color: #0077B6;
+        }
+
+        /* Main Section */
+        .hero {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 158, 219, 0.8), rgba(0, 58, 100, 0.9)), url('https://source.unsplash.com/1600x900/?impact,helping');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
+        .btn-donor { background: #005F99; }
+        .btn-charity { background: #0077B6; }
+        .btn-guest { background: #0099CC; }
+
+        .btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: left;
+            width: 350px;
+        }
+
+        .modal h2 { font-size: 24px; margin-bottom: 15px; }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background: #005F99;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .modal button:hover { background: #004577; }
+
+        .switch-mode {
+            text-align: center;
+            margin-top: 10px;
+            color: #0077B6;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .switch-mode:hover { text-decoration: underline; }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        // Store user credentials (temporary storage)
+        let users = {
+            donor: null,
+            guest: null,
+            charity: null
+        };
+
+        function openModal(type) {
+            document.getElementById(type + "-modal").style.display = "block";
+        }
+
+        function closeModal(type) {
+            document.getElementById(type + "-modal").style.display = "none";
+        }
+
+        function switchToSignup(type) {
+            document.getElementById(type + "-login").style.display = "none";
+            document.getElementById(type + "-signup").style.display = "block";
+        }
+
+        function switchToLogin(type) {
+            document.getElementById(type + "-signup").style.display = "none";
+            document.getElementById(type + "-login").style.display = "block";
+        }
+
+        // Handle donor signup and login
+        function handleDonorLogin() {
+            const email = document.getElementById("donor-email").value;
+            const password = document.getElementById("donor-password").value;
+            const errorElement = document.getElementById("donor-error");
+
+            if (users.donor && users.donor.email === email && users.donor.password === password) {
+                errorElement.textContent = ""; // Clear any previous error
+                alert("Login successful!");
+                closeModal("donor");
+                // Redirect to donor dashboard page
+                window.location.href = "donordashboard.html";
+            } else {
+                errorElement.textContent = "Invalid credentials, please try again.";
+            }
+        }
+
+        function handleDonorSignup() {
+            const email = document.getElementById("donor-email-signup").value;
+            const password = document.getElementById("donor-password-signup").value;
+            const passwordConfirm = document.getElementById("donor-password-confirm").value;
+            const errorElement = document.getElementById("donor-error");
+
+            if (password !== passwordConfirm) {
+                errorElement.textContent = "Passwords do not match.";
+                return;
+            }
+
+            // Save the credentials in memory
+            users.donor = { email, password };
+            errorElement.textContent = ""; // Clear any previous error
+            alert("Sign up successful! You can now log in.");
+            switchToLogin("donor");
+        }
+
+        // Handle guest login
+        function handleGuestLogin() {
+            const email = document.getElementById("guest-email").value;
+            const errorElement = document.getElementById("guest-error");
+
+            if (email) {
+                errorElement.textContent = ""; // Clear any previous error
+                alert("Guest login successful!");
+                closeModal("guest");
+                // Redirect to donor dashboard page
+                window.location.href = "donordashboard.html";
+            } else {
+                errorElement.textContent = "Please enter a valid email.";
+            }
+        }
+
+        // Handle charity signup and login
+        function handleCharityLogin() {
+            const email = document.getElementById("charity-email").value;
+            const password = document.getElementById("charity-password").value;
+            const errorElement = document.getElementById("charity-error");
+
+            if (users.charity && users.charity.email === email && users.charity.password === password) {
+                errorElement.textContent = ""; // Clear any previous error
+                alert("Charity login successful!");
+                closeModal("charity");
+                window.location.href = "charitydashboard.html";
+            } else {
+                errorElement.textContent = "Invalid credentials, please try again.";
+            }
+        }
+
+        function handleCharitySignup() {
+            const email = document.getElementById("charity-email-signup").value;
+            const password = document.getElementById("charity-password-signup").value;
+            const passwordConfirm = document.getElementById("charity-password-confirm").value;
+            const errorElement = document.getElementById("charity-error");
+
+            if (password !== passwordConfirm) {
+                errorElement.textContent = "Passwords do not match.";
+                return;
+            }
+
+            // Save the credentials in memory
+            users.charity = { email, password };
+            errorElement.textContent = ""; // Clear any previous error
+            alert("Charity sign up successful! You can now log in.");
+            switchToLogin("charity");
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>1Cause</h1>
+        <button class="home-btn" onclick="history.back()">Home</button>
+    </div>
+
+    <section class="hero">
+        <h1>How will you make an impact today?</h1>
+        <p>Choose your role and start making a difference.</p>
+        <div class="buttons">
+            <button class="btn btn-donor" onclick="openModal('donor')">Donor</button>
+            <button class="btn btn-charity" onclick="openModal('charity')">Charity</button>
+            <button class="btn btn-guest" onclick="openModal('guest')">Donate as Guest</button>
+        </div>
+    </section>
+
+    <!-- Donor Login/Signup Modal -->
+    <div id="donor-modal" class="modal">
+        <span class="close" onclick="closeModal('donor')">&times;</span>
+
+        <div id="donor-login">
+            <h2>Donor Login</h2>
+            <input type="email" id="donor-email" placeholder="Email">
+            <input type="password" id="donor-password" placeholder="Password">
+            <button onclick="handleDonorLogin()">Login</button>
+            <div class="switch-mode" onclick="switchToSignup('donor')">Sign up if you are a new user</div>
+            <div id="donor-error" class="error"></div>
+        </div>
+
+        <div id="donor-signup" style="display: none;">
+            <h2>Donor Sign Up</h2>
+            <input type="email" id="donor-email-signup" placeholder="Email">
+            <input type="password" id="donor-password-signup" placeholder="Password">
+            <input type="password" id="donor-password-confirm" placeholder="Password again">
+            <button onclick="handleDonorSignup()">Sign Up</button>
+            <div class="switch-mode" onclick="switchToLogin('donor')">Already have an account? Log in</div>
+            <div id="donor-error" class="error"></div>
+        </div>
+    </div>
+
+    <!-- Charity Login/Signup Modal -->
+    <div id="charity-modal" class="modal">
+        <span class="close" onclick="closeModal('charity')">&times;</span>
+
+        <div id="charity-login">
+            <h2>Charity Login</h2>
+            <input type="email" id="charity-email" placeholder="Email">
+            <input type="password" id="charity-password" placeholder="Password">
+            <button onclick="handleCharityLogin()">Login</button>
+            <div class="switch-mode" onclick="switchToSignup('charity')">Sign up if you are a new charity</div>
+            <div id="charity-error" class="error"></div>
+        </div>
+
+        <div id="charity-signup" style="display: none;">
+            <h2>Charity Sign Up</h2>
+            <input type="email" id="charity-email-signup" placeholder="Email">
+            <input type="password" id="charity-password-signup" placeholder="Password">
+            <input type="password" id="charity-password-confirm" placeholder="Password again">
+            <button onclick="handleCharitySignup()">Sign Up</button>
+            <div class="switch-mode" onclick="switchToLogin('charity')">Already have an account? Log in</div>
+            <div id="charity-error" class="error"></div>
+        </div>
+    </div>
+
+    <!-- Guest Login Modal -->
+    <div id="guest-modal" class="modal">
+        <span class="close" onclick="closeModal('guest')">&times;</span>
+
+        <div id="guest-login">
+            <h2>Donate as Guest</h2>
+            <input type="email" id="guest-email" placeholder="Email">
+            <button onclick="handleGuestLogin()">Continue as Guest</button>
+            <div id="guest-error" class="error"></div>
+        </div>
+    </div>
+</body>
+</html>

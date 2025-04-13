@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support a Cause - 1Cause</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #005F99;
+        }
+        .cause-selection {
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+        select {
+            background: #e0f0ff;
+        }
+        button {
+            background: #0077B6;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #005F99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Support a Cause</h1>
+        <p>Select a cause to contribute to and help charities make an impact.</p>
+        <div class="cause-selection">
+            <label for="cause">Choose a cause:</label>
+            <select id="cause">
+                <option value="wildfires">LA Wildfires</option>
+                <option value="sudan-war">Sudan Conflict</option>
+                <option value="climate-change">Climate Change</option>
+            </select>
+        </div>
+        <button id="donateBtn">Donate</button>
+    </div>
+</body>
+</html>

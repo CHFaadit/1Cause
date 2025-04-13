@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to 1Cause</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            color: #222;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #0077B6;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .navbar .login-btn {
+            background: white;
+            color: #0077B6;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+        }
+
+        .navbar .login-btn:hover {
+            background: #005F99;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 158, 219, 0.8), rgba(0, 58, 100, 0.9)), url('https://source.unsplash.com/1600x900/?charity,helping');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            background: #005F99;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .cta-btn:hover {
+            background: #004377;
+        }
+
+        /* About Section */
+        .about {
+            padding: 50px;
+            text-align: center;
+            background: white;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: auto;
+            color: #444;
+        }
+
+        /* Model UN Links */
+        .mun-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .mun-links a {
+            background: #0077B6;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .mun-links a:hover {
+            background: #005F99;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background: #0077B6;
+            color: white;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 50px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">1Cause</div>
+        <a href="<%= login_path %>" class="login-btn">Login/Sign Up</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Empowering Change Through AI & Giving</h1>
+        <p>Join 1Cause, a revolutionary platform that connects donors directly to real-world causes, ensuring  contributions make the biggest possible impact, with no room for fraud. 1Cause ensures that money goes directly to those who need it most.</p>
+        <a href="#about" class="cta-btn">Learn More</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>How We Make a Difference</h2>
+        <p>We use AI to analyze global issues in real-time and direct funding to where it matters most. Our platform enables donors to contribute transparently, without a middle man with interests in profit while supporting UN-backed initiatives, including climate and humanitarian issues.</p>
+        
+        <!-- Model UN Links -->
+        <div class="mun-links">
+            <a href="https://www.unrefugees.org/emergencies/" target="_blank">UN Current Global Issues</a>
+            <a href="https://www.un.org/en/global-issues/crisis-and-emergency-response" target="_blank">How the UN responds to crises</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>© 2025 1Cause | Empowering Change</footer>
+
+</body>
+</html>

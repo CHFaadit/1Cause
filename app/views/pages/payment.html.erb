@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Payment | 1Cause</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fa;
+            color: #222;
+            text-align: center;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #0077B6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: #005F99;
+        }
+
+        /* Payment Container */
+        .payment-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .payment-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #0077B6;
+        }
+
+        .payment-container p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .payment-options button {
+            background: #0077B6;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            flex: 1;
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .payment-options button:hover {
+            background: #005F99;
+        }
+
+        .payment-options button i {
+            font-size: 20px;
+        }
+
+        /* Payment Form */
+        .payment-form {
+            display: none;
+            text-align: left;
+        }
+
+        .payment-form.active {
+            display: block;
+        }
+
+        .payment-form label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .payment-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .payment-form button {
+            background: #0099CC;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .payment-form button:hover {
+            background: #0077B6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background: #0077B6;
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Donation Amount Popup */
+        .donation-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .donation-popup .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .donation-popup input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .donation-popup button {
+            background: #0099CC;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .donation-popup button:hover {
+            background: #0077B6;
+        }
+
+        /* Payment Completion Message */
+        .payment-message {
+            display: none;
+            margin-top: 20px;
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .amount-bold {
+            font-weight: bold;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <a href="javascript:history.back()" class="back-button">← Back</a>
+
+    <div id="donation-popup" class="donation-popup">
+        <div class="popup-content">
+            <h2>Enter Donation Amount</h2>
+            <input type="number" id="donation-amount" placeholder="Amount" min="1">
+            <button onclick="startPaymentProcess()">OK</button>
+        </div>
+    </div>
+
+    <div class="payment-container">
+        <h1>Make a Payment</h1>
+        <p>Choose your preferred payment method to complete your donation of <span id="donation-display" class="amount-bold">$0</span>.</p>
+
+        <div class="payment-options">
+            <button onclick="showForm('credit-card')">
+                <i class="fas fa-credit-card"></i> Credit Card
+            </button>
+            <button onclick="showForm('paypal')">
+                <i class="fab fa-paypal"></i> PayPal
+            </button>
+            <button onclick="showForm('bank-transfer')">
+                <i class="fas fa-university"></i> Bank Transfer
+            </button>
+        </div>
+
+        <div id="credit-card-form" class="payment-form">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" required>
+            <button type="button" onclick="processPayment()">Pay Now</button>
+        </div>
+
+        <div id="paypal-form" class="payment-form">
+            <p>You will be redirected to PayPal to complete your payment.</p>
+            <button type="button" onclick="processPayment()">Continue to PayPal</button>
+        </div>
+
+        <div id="bank-transfer-form" class="payment-form">
+            <label for="account-name">Account Name</label>
+            <input type="text" id="account-name" placeholder="John Doe" required>
+
+            <label for="account-number">Account Number</label>
+            <input type="text" id="account-number" placeholder="123456789" required>
+
+            <label for="routing-number">Routing Number</label>
+            <input type="text" id="routing-number" placeholder="123456789" required>
+
+            <button type="button" onclick="processPayment()">Confirm Payment</button>
+        </div>
+
+        <div id="payment-message" class="payment-message">
+            Payment complete!
+        </div>
+    </div>
+
+    <footer>© 2025 1Cause | Empowering Change</footer>
+
+    <script>
+        let problemName = "<%= params[:problem_name] %>";
+
+        function startPaymentProcess() {
+            const donationAmount = document.getElementById('donation-amount').value;
+            if (donationAmount > 0) {
+                document.getElementById('donation-display').textContent = `$${donationAmount}`;
+                document.getElementById('donation-popup').style.display = 'none';
+                document.querySelector('.payment-container').style.display = 'block';
+            } else {
+                alert('Please enter a valid donation amount.');
+            }
+        }
+
+        function showForm(formType) {
+            document.querySelectorAll('.payment-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(`${formType}-form`).classList.add('active');
+        }
+
+        function processPayment() {
+            const form = document.querySelector('.payment-form.active');
+            const inputs = form.querySelectorAll('input');
+
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    allFilled = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = '#ccc';
+                }
+            });
+
+            if (allFilled) {
+                const donationAmount = document.getElementById('donation-amount').value;
+                fetch('/problems/donate/' + encodeURIComponent(problemName), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ donation_amount: donationAmount })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('payment-message').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Payment processing failed.');
+                });
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+    </script>
+    <meta name="csrf-token" content="<%= form_authenticity_token() %>">
+</body>
+</html>
